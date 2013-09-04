@@ -58,7 +58,7 @@ socket_write($socket, $morsemsgn, strlen($morsemsgn));
 socket_close($socket);
 
 // Log morse message as reformated plaintext
-$sqlLog = "INSERT INTO log (timestamp, msg) VALUES (DATETIME(), \"" . $textmsg ."\")";
+$sqlLog = "INSERT INTO log (timestamp, msg) VALUES (DATETIME('now', 'localtime'), \"" . $textmsg ."\")";
 $db = new SQLite3(LOGDB);
 $db->exec($sqlLog);
 $db->close();
