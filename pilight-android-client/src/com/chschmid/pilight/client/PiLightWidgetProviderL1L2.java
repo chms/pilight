@@ -16,7 +16,7 @@ import android.os.HandlerThread;
 import android.util.Log;
 import android.widget.RemoteViews;
 
-public class PiLightWidgetProvider extends AppWidgetProvider {
+public class PiLightWidgetProviderL1L2 extends AppWidgetProvider {
 	public static String CLICK_LIGHT1 = "com.chschmid.pilight.client.light1";
 	public static String CLICK_LIGHT2 = "com.chschmid.pilight.client.light2";
 	public static String CLICK_LIGHT3 = "com.chschmid.pilight.client.light3";
@@ -24,9 +24,9 @@ public class PiLightWidgetProvider extends AppWidgetProvider {
 	private static HandlerThread sWorkerThread;
     private static Handler sWorkerQueue;
 
-    public PiLightWidgetProvider() {
+    public PiLightWidgetProviderL1L2() {
         // Start the worker thread
-        sWorkerThread = new HandlerThread("PiLightWidget-worker");
+        sWorkerThread = new HandlerThread("PiLightWidgetL1L2-worker");
         sWorkerThread.start();
         sWorkerQueue = new Handler(sWorkerThread.getLooper());
     }
@@ -34,22 +34,18 @@ public class PiLightWidgetProvider extends AppWidgetProvider {
     private RemoteViews buildLayout(Context context, int appWidgetId, boolean largeLayout) {
     	
         RemoteViews rv;
-        rv = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
+        rv = new RemoteViews(context.getPackageName(), R.layout.widget_layout_l1l2);
         
-        final Intent onClickLight1Intent = new Intent(context, PiLightWidgetProvider.class);
-        onClickLight1Intent.setAction(PiLightWidgetProvider.CLICK_LIGHT1);
+        final Intent onClickLight1Intent = new Intent(context, PiLightWidgetProviderL1L2.class);
+        onClickLight1Intent.setAction(PiLightWidgetProviderL1L2.CLICK_LIGHT1);
         final PendingIntent onClickLight1PendingIntent = PendingIntent.getBroadcast(context, 0, onClickLight1Intent, PendingIntent.FLAG_UPDATE_CURRENT);
         rv.setOnClickPendingIntent(R.id.imageView1, onClickLight1PendingIntent);
         
-        final Intent onClickLight2Intent = new Intent(context, PiLightWidgetProvider.class);
-        onClickLight2Intent.setAction(PiLightWidgetProvider.CLICK_LIGHT2);
+        final Intent onClickLight2Intent = new Intent(context, PiLightWidgetProviderL1L2.class);
+        onClickLight2Intent.setAction(PiLightWidgetProviderL1L2.CLICK_LIGHT2);
         final PendingIntent onClickLight2PendingIntent = PendingIntent.getBroadcast(context, 0, onClickLight2Intent, PendingIntent.FLAG_UPDATE_CURRENT);
         rv.setOnClickPendingIntent(R.id.imageView2, onClickLight2PendingIntent);
         
-        final Intent onClickLight3Intent = new Intent(context, PiLightWidgetProvider.class);
-        onClickLight3Intent.setAction(PiLightWidgetProvider.CLICK_LIGHT3);
-        final PendingIntent onClickLight3PendingIntent = PendingIntent.getBroadcast(context, 0, onClickLight3Intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        rv.setOnClickPendingIntent(R.id.imageView3, onClickLight3PendingIntent);
         return rv;
     }
 
@@ -122,7 +118,7 @@ public class PiLightWidgetProvider extends AppWidgetProvider {
     private void toggleLight(int iD) {
     	Socket clientSocket = new Socket();
     	try {
-    		clientSocket.connect(new InetSocketAddress("192.168.1.223", 22041), 3000);
+    		clientSocket.connect(new InetSocketAddress("192.168.22.223", 22041), 3000);
     		PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
     		if (iD == 1) out.println("01t");
     		if (iD == 2) out.println("02t");

@@ -14,22 +14,31 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <!-- The widget provider -->
-        <receiver android:name="PiLightWidgetProvider">
+        <receiver android:name="PiLightWidgetProviderL1L2">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <!-- This specifies the widget provider info -->
             <meta-data android:name="android.appwidget.provider"
-                    android:resource="@xml/widgetinfo" />
+                    android:resource="@xml/widgetinfo_l1l2" />
         </receiver>
         
-        <receiver android:name="PiLightWidgetProvider1_3">
+        <receiver android:name="PiLightWidgetProviderL1L2L3">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <!-- This specifies the widget provider info -->
             <meta-data android:name="android.appwidget.provider"
-                    android:resource="@xml/widgetinfo1" />
+                    android:resource="@xml/widgetinfo_l1l2l3" />
+        </receiver>
+        
+        <receiver android:name="PiLightWidgetProviderL3">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <!-- This specifies the widget provider info -->
+            <meta-data android:name="android.appwidget.provider"
+                    android:resource="@xml/widgetinfo_l3" />
         </receiver>
      
     </application>
